@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import Error from "./Error"
+
 
 const Formulario = ({ patients, setPatients }) => {
   const [name, setName] = useState('')
@@ -8,6 +10,13 @@ const Formulario = ({ patients, setPatients }) => {
   const [symptoms, setSymptoms] = useState('')
 
   const [error, setError] = useState(false)
+
+  const generarId = () => {
+    const random = Math.random().toString(36).substring(2)
+    const fecha = Date.now().toString(36)
+
+    return random + fecha
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,7 +34,8 @@ const Formulario = ({ patients, setPatients }) => {
       owner, 
       email, 
       fecha, 
-      symptoms
+      symptoms,
+      id: generarId()
     }
 
     //console.log(objectPatient)
@@ -56,12 +66,8 @@ const Formulario = ({ patients, setPatients }) => {
         onSubmit={handleSubmit}
         className="bg-white shadow-md rounded-lg py-10 px-5 mb-10">
 
-          {error && (
-            <div className="bg-red-800 text-white text-center p-3 uppercase font-bold mb-3 rounded-md">
-              <p>
-                All fields are required</p>
-            </div>
-            )}
+          {error && <Error><p>All fields are required</p></Error>}
+
           <div className="mb-5">
             <label htmlFor="pet" className="block text-gray-700 uppercase font-bold">
               Pet Name 
