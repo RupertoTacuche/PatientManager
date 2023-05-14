@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Error from "./Error"
 
 
-const Formulario = ({ patients, setPatients }) => {
+const Formulario = ({ patients, setPatients, patient }) => {
   const [name, setName] = useState('')
   const [owner, setOwner] = useState('')
   const [email, setEmail] = useState('')
@@ -10,6 +10,15 @@ const Formulario = ({ patients, setPatients }) => {
   const [symptoms, setSymptoms] = useState('')
 
   const [error, setError] = useState(false)
+
+  useEffect(() => {
+    
+  }, [patient])
+
+
+  
+
+
 
   const generarId = () => {
     const random = Math.random().toString(36).substring(2)
