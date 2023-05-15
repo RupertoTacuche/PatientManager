@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import Error from "./Error"
 
 
-const Formulario = ({ patients, setPatients, patient }) => {
+const Formulario = ({ patients, setPatients, patient, setPatient }) => {
   const [name, setName] = useState('')
   const [owner, setOwner] = useState('')
   const [email, setEmail] = useState('')
@@ -45,13 +45,25 @@ const Formulario = ({ patients, setPatients, patient }) => {
       email, 
       fecha, 
       symptoms,
-      id: generarId()
+      
     }
+      if(patient.id){
+        // editando el registro
+        objectPatient.id = patient.id
+        const patientsUpdated = patients.map( patientState => patientState.id === patient.id ? objectPatient : patientState )
 
+        setPatients(patientsUpdated)
+        setPatient({})
+
+      } else {
+        // nuevo registro
+        objectPatient.id = generarId()
+        setPatients([...patients, objectPatient]);
+      }
     //console.log(objectPatient)
     //setPatients(name)
    
-  setPatients([...patients, objectPatient]);
+  
 
   // Reiniciar el formulario
   setName('')
