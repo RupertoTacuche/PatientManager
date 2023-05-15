@@ -12,13 +12,14 @@ const Formulario = ({ patients, setPatients, patient }) => {
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    
+     if( Object.keys(patient).length > 0 ){
+      setName(patient.name)
+      setOwner(patient.owner)
+      setEmail(patient.email)
+      setFecha(patient.fecha)
+      setSymptoms(patient.symptoms)
+     } 
   }, [patient])
-
-
-  
-
-
 
   const generarId = () => {
     const random = Math.random().toString(36).substring(2)
